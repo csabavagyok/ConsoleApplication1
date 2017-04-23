@@ -1,0 +1,13 @@
+c:\users\csaba\documents\visual studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+c:\users\csaba\documents\visual studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+c:\users\csaba\documents\visual studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+c:\users\csaba\documents\visual studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+c:\users\csaba\documents\visual studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+c:\users\csaba\documents\visual studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Csaba\Documents\Visual Studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\Content\Kispest.xlsx
+C:\Users\Csaba\Documents\Visual Studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\LinqToExcel.dll
+C:\Users\Csaba\Documents\Visual Studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\Remotion.Data.Linq.dll
+C:\Users\Csaba\Documents\Visual Studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\Remotion.dll
+C:\Users\Csaba\Documents\Visual Studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\Remotion.Interfaces.dll
+C:\Users\Csaba\Documents\Visual Studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\bin\Debug\LinqToExcel.xml
+C:\Users\Csaba\documents\visual studio 2015\Projects\OMSZ\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.ResolveComReference.cache
