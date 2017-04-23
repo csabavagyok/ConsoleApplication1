@@ -126,17 +126,18 @@ namespace ConsoleApplication1
                 Console.WriteLine("====================================");
                 Console.WriteLine("Elszámolt dolgozók száma: " + counter + " fő.");
                 double goodPercent = (double)goodCounter / (double)counter;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Helyesen elszámolt dolgozók száma: " + goodCounter + " fő. " + goodPercent.ToString("#0.##%", CultureInfo.InvariantCulture));
-                if(goodCounter/counter*100 != 100)
-                { Console.WriteLine("Ha így hagyjuk a munkaórát, Marosvölgyi kaszája sújtani fog..."); }
-                else { Console.WriteLine("Marosvölgyi ki fogja verni :-)"); }
+                Console.ForegroundColor = ConsoleColor.White;
                 double errorPercent = (double)errorCounter / (double)counter;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Helytelenül elszámolt dolgozók száma: " + errorCounter + " fő. " + errorPercent.ToString("#0.##%", CultureInfo.InvariantCulture));
                 Console.WriteLine("Helytelenül elszámolt dolgozók nevei:");
                 foreach (var item in errorNames)
                 {
                     Console.WriteLine(item);
                 }
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("A munkaóra elszámolás kiértékelése véget ért.");
                 //close file and dispose of com objects
                 xlWB.Close(false, null, null);
