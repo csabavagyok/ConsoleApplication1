@@ -31,9 +31,9 @@ namespace ConsoleApplication1
                 Excel.Workbook xlWB;
                 Excel.Worksheet xlWS;
                 Excel.Range range;
-                int counter = 0;
-                byte errorCounter = 0;
-                byte goodCounter = 0;
+                short counter = 0;
+                short errorCounter = 0;
+                short goodCounter = 0;
                 decimal difference = 0;
                 List<string> errorNames = new List<string>();
 
@@ -142,7 +142,7 @@ namespace ConsoleApplication1
                 //close file and dispose of com objects
                 xlWB.Close(false, null, null);
                 xlApp.Quit();
-                Console.WriteLine("Az állomány terminálva.");
+                Console.WriteLine("Az állomány bezárva.");
                 Console.Beep();
                 Marshal.ReleaseComObject(xlWS);
                 Marshal.ReleaseComObject(xlWB);
