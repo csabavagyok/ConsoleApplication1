@@ -11,77 +11,117 @@ using System.Globalization;
 
 namespace ConsoleApplication1
 {
+    /// <summary>
+    /// Abstract class to try to open the xlsx file of the month revision
+    /// </summary>
     public abstract class TryOpenXlsx
     {
+        /// <summary>
+        /// Main method to open and read the xlsx file
+        /// </summary>
         public static void TryOpenFile()
         { 
             try
             {
-                //welcome messagee
+                //welcome message
                 Console.WriteLine("Üdvözlöm.\nA munkaóra elszámolás ellenőrzése azonnal kezdődik...");
 
                 //get and print last access time
                 string filePath = @"C:\Downloaded Torrents\Kispest.xlsx";
                 var lastAccessDate = File.GetLastWriteTime(filePath);
-                Console.WriteLine("A jelenleg használt Excel fájl utolsó módosításának dátuma:" + lastAccessDate);
+                Console.WriteLine("Az állomány olvasásra megnyitva.");
+                Console.WriteLine("A jelenleg használt Excel fájl utolsó módosításának dátuma: " + lastAccessDate);
 
+                #region Variables
+                ///<summary>
+                ///Declaration of variables used throughout the program.
+                /// </summary>
                 //declare variables
+                //variables for the excel file and range
                 Excel.Application xlApp = new Excel.Application();
                 xlApp.Visible = false;
                 Excel.Workbook xlWB;
                 Excel.Worksheet xlWS;
                 Excel.Range range;
+                string str;
+
+                //variables for iterating counters, lists
+                short i = 4;
                 short counter = 0;
                 short errorCounter = 0;
                 short goodCounter = 0;
                 decimal difference = 0;
                 List<string> errorNames = new List<string>();
 
+                //variables to hold data read-in from the excel file
+                string name;
+                string hoursOfMonth;
+                decimal hours;
+                decimal workHours;
+                short sick = 0; ;
+                string sickCheck;
+                short dayOff = 0;
+                string dayOffCheck;
+                short lecture = 0;
+                string lectureCheck;
+                decimal overTime;
+                decimal afterNoon;
+                decimal nightTime;
+                decimal extra;
+                string extraCheck;
+                decimal numberValue;
+                decimal determineOverTime;
+                #endregion
+
+                #region FileOpen
                 //open file and worksheet #1
                 xlWB = xlApp.Workbooks.Open(filePath, 0, true, 5, null, null, true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", true, false, 0, true, 1, 0);
                 Console.WriteLine("Az állomány megnyitása sikeres.");
                 xlWS = (Excel.Worksheet)xlWB.Sheets.Item[1];
                 Console.WriteLine("A munkalap megnyitása sikeres.");
                 Console.WriteLine("Az elemek átvizsgálása.");
+                #endregion
 
                 //iterate through selected range items
-                for (int i = 4; i < 61; i++)
+                //for (i = 4; i < 61; i++)
+                //{
+                do
                 {
-                    string str = "A" + i;
+                    str = "A" + i;
                     range = xlWS.Range[str];
-                    var name = range.Text;
-                    if (name != "")
-                    {
+                    name = range.Text;
+                    //if (name != "")
+                    //{
                         //display name to screen
                         Console.WriteLine(name + " munkaóra elszámolásának kiértékelése...");
                         counter++;
-                        
 
                         //display if pre-calculated pay-off was correct
                         //declare variables
-                        var hoursOfMonth = xlWS.Range["D2"].Text;    //havi óraszám
-                        var hours = decimal.Parse(xlWS.Range["D" + i].Text);        //szerződés szerinti óraszám
-                        var workHours = decimal.Parse(xlWS.Range["E" + i].Text);    //teljesített óraszám
-                        var sick = 0;
-                        var sickCheck = xlWS.Range["G" + i].Text;         //betegség napok
-                        if ( sickCheck != "")
-                        { sick = int.Parse(sickCheck); }
-                        var dayOff = 0;
-                        var dayOffCheck = xlWS.Range["I" + i].Text;
-                        if ( dayOffCheck != "")
-                        { dayOff = int.Parse(dayOffCheck); }
-                        var lecture = 0;
-                        var lectureCheck = xlWS.Range["K" + i].Text;
-                        if( lectureCheck != "")
-                        { lecture = int.Parse(lectureCheck); }
-                        var overTime = decimal.Parse(xlWS.Range["O" + i].Text);     //túlóra
-                        var afterNoon = decimal.Parse(xlWS.Range["P" + i].Text);    //délutáni pótlék
-                        var nightTime = decimal.Parse(xlWS.Range["Q" + i].Text);    //éjszakai pótlék
-                        decimal extra = 0;
-                        var extraCheck = xlWS.Range["R" + i].Text;
-                        if ( extraCheck != "" )
+                            hoursOfMonth = xlWS.Range["D2"].Text;    //havi óraszám
+                        Console.WriteLine(xlWS.Range["D" + i].Text);
+                        hours = decimal.Parse(xlWS.Range["D" + i].Text);        //szerződés szerinti óraszám
+                        workHours = decimal.Parse(xlWS.Range["E" + i].Text);    //teljesített óraszám
+                        sick = 0;
+                        sickCheck = xlWS.Range["G" + i].Text;         //betegség napok
+                        if (sickCheck != "")
+                        { sick = short.Parse(sickCheck); }
+                        dayOff = 0;
+                        dayOffCheck = xlWS.Range["I" + i].Text;
+                        if (dayOffCheck != "")
+                        { dayOff = short.Parse(dayOffCheck); }
+                        lecture = 0;
+                        lectureCheck = xlWS.Range["K" + i].Text;
+                        if (lectureCheck != "")
+                        { lecture = short.Parse(lectureCheck); }
+                        overTime = decimal.Parse(xlWS.Range["O" + i].Text);     //túlóra
+                        afterNoon = decimal.Parse(xlWS.Range["P" + i].Text);    //délutáni pótlék
+                        nightTime = decimal.Parse(xlWS.Range["Q" + i].Text);    //éjszakai pótlék
+                        extra = 0;
+                        extraCheck = xlWS.Range["R" + i].Text;
+                        if (extraCheck != "")
                         { extra = decimal.Parse(extraCheck); }
-                        var numberValue = hours / decimal.Parse(hoursOfMonth);
+                        numberValue = hours / decimal.Parse(hoursOfMonth);
 
                         //Console.WriteLine("A dolgozó havi kötelező óraszáma: " + hours);
                         //Console.WriteLine("A dolgozó beteg órái: " + sick * numberValue * 8);
@@ -92,7 +132,7 @@ namespace ConsoleApplication1
                         Console.WriteLine("Túlóra: " + overTime);
                         //Console.WriteLine("200% :" + extra);
                         //Console.WriteLine("Telj.óra: " + workHours);
-                        var determineOverTime = 
+                        determineOverTime =
                             workHours -
                             hours +
                             ((sick * numberValue * 8) +
@@ -101,7 +141,7 @@ namespace ConsoleApplication1
                             extra);
                         Console.WriteLine("SZÁMOLÁS: " + determineOverTime);
                         //determine if pay-off was correct
-                        if (determineOverTime == 
+                        if (determineOverTime ==
                             overTime)
                         {
                             goodCounter++;
@@ -120,9 +160,11 @@ namespace ConsoleApplication1
                             Console.ForegroundColor = ConsoleColor.White;
                         }
 
-                        //TODO use another class to create new elements in the combobox
-                    }
+                    //TODO use another class to create new elements in the combobox
+                    //}
+                    i++;
                 }
+                while (name != "" || name != null);
                 Console.WriteLine("====================================");
                 Console.WriteLine("Elszámolt dolgozók száma: " + counter + " fő.");
                 double goodPercent = (double)goodCounter / (double)counter;
@@ -158,7 +200,10 @@ namespace ConsoleApplication1
                 //write error to screen
                 Console.WriteLine("Error. File was not found.");
             }
-            
+        }
+        private void CloseFile()
+        {
+
         }
     }
 }
